@@ -6,7 +6,7 @@
 /*   By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 14:51:58 by pmolzer           #+#    #+#             */
-/*   Updated: 2024/06/17 19:17:51 by hzimmerm         ###   ########.fr       */
+/*   Updated: 2024/06/17 19:29:07 by hzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int main(int ac, char **av, char **env)
 			break;
 		}
            	//free
-		if (*line) //check that entered line is not empty (empty lines are not stored in history)
+		if (*line) // <-- this checks that entered line is not empty (empty lines are not stored in history)
 			add_history(line);
 /*       	if(check for line content)
            	//error_management
