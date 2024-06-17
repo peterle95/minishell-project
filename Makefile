@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pmolzer <pmolzer@student.42berlin.de>      +#+  +:+       +#+         #
+#    By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/15 19:03:47 by pmolzer           #+#    #+#              #
-#    Updated: 2024/06/15 19:03:47 by pmolzer          ###   ########.fr        #
+#    Updated: 2024/06/17 13:44:02 by hzimmerm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,10 @@ NAME = minishell
 
 SRCS = $(wildcard sources/*.c)
 
-OBJS = ${SRCS: .c=.o}
+OBJS = ${SRCS:.c=.o}
 
 CC = cc 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror
 LDFLAGS = -lreadline -lhistory
 
 LIBFT_PATH	= libft/
@@ -38,10 +38,10 @@ $(NAME): $(OBJS)
 	$(CC) $(LDFLAGS) $(CFLAGS) $(OBJS) -o $(NAME) $(INC)
 
 clean:
-		@$(RM) $(OBJS)
+		@$(RM) $(OBJS) $(LIBFT_PATH)/*.o
 
 fclean: clean
-		@${RM} ${NAME}
+		@${RM} ${NAME} $(LIBFT)
 
 re: fclean all
 
