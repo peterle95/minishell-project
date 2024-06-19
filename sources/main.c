@@ -6,7 +6,7 @@
 /*   By: Henriette <Henriette@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 14:51:58 by pmolzer           #+#    #+#             */
-/*   Updated: 2024/06/19 19:10:31 by Henriette        ###   ########.fr       */
+/*   Updated: 2024/06/19 19:17:06 by Henriette        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int main(int ac, char **av, char **env)
 		*/
 	}
 	// Register signal handlers
-	//signal_handeling(1); 
+	signal_handeling(1); 
 	while(1)
 	{
 		line = readline("$>");
