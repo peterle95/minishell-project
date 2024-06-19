@@ -32,7 +32,7 @@ int main(int ac, char **av, char **env)
 		*/
 	}
 	// Register signal handlers
-	signal_handeling(1); // how many 
+	signal_handeling(1); 
 	while(1)
 	{
 		line = readline("$>");
