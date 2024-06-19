@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: Henriette <Henriette@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 14:51:58 by pmolzer           #+#    #+#             */
-/*   Updated: 2024/06/17 19:29:07 by hzimmerm         ###   ########.fr       */
+/*   Updated: 2024/06/19 19:10:31 by Henriette        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 int main(int ac, char **av, char **env)
 {
 	char    *line;
-	if((ac = 1) || (!ac && !av))
+	/*if((ac = 1) || (!ac && !av))
 	{
 		printf("minishell: no arguments provided\n");
 		return(1);
 	}
-	else 
+	else*/
+	if (ac != 1) //diesen part hab ich erstmal wieder reingemacht, um unused variable errors stumm zu schalten
 	{
 		av = NULL;
 		return (0);
@@ -35,7 +36,7 @@ int main(int ac, char **av, char **env)
 		*/
 	}
 	// Register signal handlers
-	signal_handeling(1); 
+	//signal_handeling(1); 
 	while(1)
 	{
 		line = readline("$>");
@@ -45,7 +46,7 @@ int main(int ac, char **av, char **env)
 			break;
 		}
            	//free
-		if (*line) // <-- this checks that entered line is not empty (empty lines are not stored in history)
+		if (*line)
 			add_history(line);
 /*       	if(check for line content)
            	//error_management
@@ -53,7 +54,8 @@ int main(int ac, char **av, char **env)
             	//p go to parsing and execution*/
 	    	//parsing : divide line up into command table data structure
 	    	//execution : take data structure type and execute 
-		run_command(line, env);
+		if (*line)
+			run_command(line, env);
         	// free everything
 		free(line);
 	}
