@@ -15,7 +15,7 @@
 int main(int ac, char **av, char **env)
 {
 	char    *line;
-	if(ac = 1 || (!ac && !av))
+	if((ac = 1) || (!ac && !av))
 	{
 		printf("minishell: no arguments provided\n");
 		return(1);
@@ -32,7 +32,7 @@ int main(int ac, char **av, char **env)
 		*/
 	}
 	// Register signal handlers
-	signal_handeling(1);
+	signal_handeling(1); // how many 
 	while(1)
 	{
 		line = readline("$>");
