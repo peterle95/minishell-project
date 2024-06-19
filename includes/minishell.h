@@ -34,5 +34,8 @@ char	*find_cmd_file(char **cmd, char **env);
 char	*get_paths(char **env, char *name);
 void	fork_and_execute(char **cmd, char *cmd_file, char **env);
 
+// singal handeling
+void    signal_handeling(int signal);
+
 
 #endif

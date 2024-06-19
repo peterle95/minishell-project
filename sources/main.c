@@ -15,8 +15,12 @@
 int main(int ac, char **av, char **env)
 {
 	char    *line;
-
-	if (ac != 1)
+	if(ac = 1 || (!ac && !av))
+	{
+		printf("minishell: no arguments provided\n");
+		return(1);
+	}
+	else 
 	{
 		av = NULL;
 		return (0);
@@ -27,11 +31,12 @@ int main(int ac, char **av, char **env)
 		return (error_return("no such file or directory\n", 1));
 		*/
 	}
-	// handle signals
+	// Register signal handlers
+	signal_handeling(1);
 	while(1)
 	{
 		line = readline("$>");
-        	if(line == NULL)
+        if(line == NULL)
 		{
 			printf("exit\n");
 			break;
