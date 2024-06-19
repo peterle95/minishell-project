@@ -29,7 +29,7 @@ int main(int ac, char **av, char **env)
 		ft_putstr_fd(av[1], 2);
 		ft_putstr_fd(": ", 2);
 		return (error_return("no such file or directory\n", 1));
-		P: I would insert the while loop belove in this scope. And then, in the parsing part we look if there are multiple arguments,
+		P: I would insert the while loop belowe in this scope. And then, in the parsing part we look if there are multiple arguments,
 		and tokenize them. We should check the type of the tokens, and if they are not what is expected, then throw an error message.
 		Does it make sense?
 		*/
