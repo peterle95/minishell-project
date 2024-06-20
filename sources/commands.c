@@ -6,7 +6,7 @@
 /*   By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:20:22 by hzimmerm          #+#    #+#             */
-/*   Updated: 2024/06/20 15:52:15 by hzimmerm         ###   ########.fr       */
+/*   Updated: 2024/06/20 16:22:16 by hzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	fork_and_execute(char **cmd, char *cmd_file, char **env)
 	else if (pid == 0)
 	{
 		if (execve(cmd_file, cmd, env) == -1)
-			error_return("execve", 1);
+			error_return("execve", 0);
 	}
 	else
 		waitpid(pid, &status, 0);
