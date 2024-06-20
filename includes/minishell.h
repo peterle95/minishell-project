@@ -6,7 +6,7 @@
 /*   By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:43:51 by pmolzer           #+#    #+#             */
-/*   Updated: 2024/06/17 19:00:19 by hzimmerm         ###   ########.fr       */
+/*   Updated: 2024/06/20 15:41:01 by hzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	run_command(char *line, char **env);
 char	*find_cmd_file(char **cmd, char **env);
 char	*get_paths(char **env, char *name);
 void	fork_and_execute(char **cmd, char *cmd_file, char **env);
+char	*ft_trim(char *line, char c);
 
 // singal handeling
 void    signal_handeling(int signal);

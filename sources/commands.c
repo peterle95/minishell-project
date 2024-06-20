@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Henriette <Henriette@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:20:22 by hzimmerm          #+#    #+#             */
-/*   Updated: 2024/06/19 18:15:51 by Henriette        ###   ########.fr       */
+/*   Updated: 2024/06/20 15:52:15 by hzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,58 @@ void	run_command(char *line, char **env)
 {
 	char	**cmd;
 	char	*cmd_file;
+	char	*temp;
 	
-	cmd = ft_split(line, ' ');
-	cmd_file = find_cmd_file(cmd, env);
-	if (cmd_file == NULL)
+	if (ft_strrchr(line, '/'))
 	{
-		free(cmd_file);
-		free_array(cmd);
-		return;
+		cmd_file = ft_trim(line, ' ');
+		if (access(cmd_file, X_OK) != 0)
+		{
+			ft_putstr_fd(cmd_file, 2);
+			ft_putstr_fd(": command not found\n", 2);
+			return;
+		}
+		temp = ft_strrchr(line, '/') + 1;
+		cmd = ft_split(temp, ' ');
+		if (cmd_file == NULL || cmd[0] == NULL)
+			error_return("ft_strdup", 1);
+	}
+	else
+	{
+		cmd = ft_split(line, ' ');
+		cmd_file = find_cmd_file(cmd, env);
+		if (cmd_file == NULL)
+		{
+			free(cmd_file);
+			free_array(cmd);
+			return;
+		}
 	}
 	fork_and_execute(cmd, cmd_file, env);
 	free_array(cmd);
 	free(cmd_file);
 }
+
+char	*ft_trim(char *line, char c)
+{
+	char	*trim;
+	int	i;
+
+	i = 0;
+	while (line[i] && line[i] != c)
+		i++;
+	trim = malloc((i + 1) * sizeof(char));
+	if (!trim)
+		return (NULL);
+	i = 0;
+	while (line[i] && line[i] != c)
+	{
+		trim[i] = line[i];
+		i++;
+	}
+	trim[i] = '\0';
+	return (trim);
+} 
 
 void	fork_and_execute(char **cmd, char *cmd_file, char **env)
 {
@@ -46,7 +85,7 @@ void	fork_and_execute(char **cmd, char *cmd_file, char **env)
 	else if (pid == 0)
 	{
 		if (execve(cmd_file, cmd, env) == -1)
-			error_return("execve", 0);
+			error_return("execve", 1);
 	}
 	else
 		waitpid(pid, &status, 0);

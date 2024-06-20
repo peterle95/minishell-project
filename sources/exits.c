@@ -6,7 +6,7 @@
 /*   By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 14:17:20 by hzimmerm          #+#    #+#             */
-/*   Updated: 2024/06/17 19:00:09 by hzimmerm         ###   ########.fr       */
+/*   Updated: 2024/06/20 12:34:10 by hzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	error_return(char *str, int opt)
 {
+	// add errno? errnum?
 	if (opt == 1)
 		ft_putstr_fd(str, 2);
 	if (opt == 0)

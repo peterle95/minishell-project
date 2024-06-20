@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Henriette <Henriette@student.42.fr>        +#+  +:+       +#+         #
+#    By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/15 19:03:47 by pmolzer           #+#    #+#              #
-#    Updated: 2024/06/19 18:04:31 by Henriette        ###   ########.fr        #
+#    Updated: 2024/06/20 12:08:10 by hzimmerm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ OBJS = ${SRCS:.c=.o}
 CC = cc 
 CFLAGS = -g -Wall -Wextra -Werror
 LDFLAGS = -lreadline -lhistory
+ADSAN = -fsanitize=address
 INC		=	-Iincludes\
 			-I$(LIBFT_PATH)\
 
