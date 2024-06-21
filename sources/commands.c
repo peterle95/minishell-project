@@ -6,13 +6,66 @@
 /*   By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:20:22 by hzimmerm          #+#    #+#             */
-/*   Updated: 2024/06/20 16:22:16 by hzimmerm         ###   ########.fr       */
+/*   Updated: 2024/06/21 18:16:12 by hzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	run_command(char *line, char **env)
+void	set_input(t_input *input)
+{
+	input->command = (char **)malloc(2 * sizeof(char *));
+	input->words = (char **)malloc(2 * sizeof(char *));
+	input->command[0] = ft_strdup("ls -l");
+	input->words[0] = ft_strdup("ls");
+	input->words[1] = ft_strdup("-l");
+	input->tokens = NULL;
+	input->index = 0;
+	input->prev = NULL;
+	input->next = NULL;
+	
+}
+
+void	run_command_newinput(char **env)
+{
+	t_input	*input = (t_input *)malloc(sizeof(t_input));
+	char	**cmd;
+	char	*cmd_file;
+	char	*temp;
+	
+	set_input(input);
+	printf("%s\n", input->command[0]);
+	if (ft_strrchr(input->command[0], '/'))
+	{
+		cmd_file = ft_trim(input->command[0], ' ');
+		if (access(cmd_file, X_OK) != 0)
+		{
+			ft_putstr_fd(cmd_file, 2);
+			ft_putstr_fd(": command not found\n", 2);
+			return;
+		}
+		temp = ft_strrchr(input->command[0], '/') + 1;
+		cmd = ft_split(temp, ' ');
+		if (cmd_file == NULL || cmd[0] == NULL)
+			error_return("ft_strdup", 1);
+	}
+	else
+	{
+		cmd = ft_split(input->command[0], ' ');
+		cmd_file = find_cmd_file(cmd, env);
+		if (cmd_file == NULL)
+		{
+			free(cmd_file);
+			free_array(cmd);
+			return;
+		}
+	}
+	fork_and_execute(cmd, cmd_file, env);
+	free_array(cmd);
+	free(cmd_file);	
+}
+/*
+void	run_command_oldinput(char *line, char **env)
 {
 	char	**cmd;
 	char	*cmd_file;
@@ -46,7 +99,7 @@ void	run_command(char *line, char **env)
 	fork_and_execute(cmd, cmd_file, env);
 	free_array(cmd);
 	free(cmd_file);
-}
+}*/
 
 char	*ft_trim(char *line, char c)
 {

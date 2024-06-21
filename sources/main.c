@@ -6,7 +6,7 @@
 /*   By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 14:51:58 by pmolzer           #+#    #+#             */
-/*   Updated: 2024/06/21 16:22:20 by hzimmerm         ###   ########.fr       */
+/*   Updated: 2024/06/21 18:15:34 by hzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int main(int ac, char **av, char **env)
 	    	//parsing : divide line up into command table data structure
 	    	//execution : take data structure type and execute 
 		if (*line)
-			run_command(line, env);
+			run_command(env);
 		signal_handeling(1);
         	// free everything
 		free(line);
