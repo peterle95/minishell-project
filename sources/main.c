@@ -6,7 +6,7 @@
 /*   By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 14:51:58 by pmolzer           #+#    #+#             */
-/*   Updated: 2024/06/20 15:49:37 by hzimmerm         ###   ########.fr       */
+/*   Updated: 2024/06/21 16:22:20 by hzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,13 @@ int main(int ac, char **av, char **env)
 	if (ac != 1)
 		av = NULL;
 		// MAYBE: take care of arguments to behave like bash (execute bash script, error everything else)
-	// Register signal handlers
-	signal_handeling(1); 
+	// Register signal handlers 
 	while(1)
 	{
 		line = readline("$>");
         if(line == NULL)
 		{
-			printf("exit\n");
+			ft_putstr_fd("exit\n", 1);
 			exit(EXIT_SUCCESS);
 		}
            	//free
@@ -40,6 +39,7 @@ int main(int ac, char **av, char **env)
 	    	//execution : take data structure type and execute 
 		if (*line)
 			run_command(line, env);
+		signal_handeling(1);
         	// free everything
 		free(line);
 	}

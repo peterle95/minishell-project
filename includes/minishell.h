@@ -6,7 +6,7 @@
 /*   By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:43:51 by pmolzer           #+#    #+#             */
-/*   Updated: 2024/06/20 15:41:01 by hzimmerm         ###   ########.fr       */
+/*   Updated: 2024/06/21 16:41:47 by hzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,18 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../libft/libft.h"
+
+typedef struct s_input
+{
+	char *words;
+	char *command;
+	char *tokens;
+	int	index;
+	struct s_input *prev;
+	struct s_input *next;
+} t_input;
+
+
 
 //exit and free functions
 int	error_return(char *str, int opt);
