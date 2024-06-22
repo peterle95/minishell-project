@@ -16,32 +16,33 @@ int main(int ac, char **av, char **env)
 {
 	char    *line;
 	
+	(void)av;
 	if (ac != 1)
 		av = NULL;
 		// MAYBE: take care of arguments to behave like bash (execute bash script, error everything else)
-	// Register signal handlers 
+	signal(SIGINT, signal_handeling);
+    signal(SIGQUIT, signal_handeling);
 	while(1)
 	{
 		line = readline("$>");
         if(line == NULL)
+        {
+            // This is where Ctrl+D is handled
+            ft_putstr_fd("\nexit\n", 1);  // Print newline before "exit"
+            break;  // Exit the loop
+        }
+		if (*line)
+			add_history(line);
+		if(check_line(line) != 0)
 		{
 			ft_putstr_fd("exit\n", 1);
 			exit(EXIT_SUCCESS);
 		}
-           	//free
-		if (*line)
-			add_history(line);
-/*       	if(check for line content)
-           	//error_management
-        	else
-            	//p go to parsing and execution*/
-	    	//parsing : divide line up into command table data structure
-	    	//execution : take data structure type and execute 
-		if (*line)
-			run_command(env);
-		signal_handeling(1);
+		else if (*line)
+			parse(line, env);	
         	// free everything
 		free(line);
 	}
+	rl_clear_history();
 	return (0);
 }

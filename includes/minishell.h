@@ -24,6 +24,8 @@
 # include <readline/history.h>
 # include "../libft/libft.h"
 
+#define MAX_ARGS 100
+
 typedef struct s_input
 {
 	char **words;
@@ -50,6 +52,9 @@ void	run_command(char **env);
 
 // singal handeling
 void    signal_handeling(int signal);
+
+// checker for input in the cmd line
+int check_line(char *line);
 
 
 #endif

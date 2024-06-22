@@ -20,6 +20,11 @@ int check_line(char *line) {
     int in_single_quote = 0; // Flag to track single quote state
     int in_double_quote = 0; // Flag to track double quote state
 
+    if (!line) 
+    {
+        ft_putstr_fd("Error: NULL input\n", 2);
+        return 1;
+    }
     while (line[i]) {
         if (line[i] == '\'' && !in_double_quote) {
             // Single quote encountered, toggle in_single_quote flag
