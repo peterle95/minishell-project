@@ -47,6 +47,7 @@ SRC = ft_isalpha \
 	ft_puthex_printf		\
 	ft_putptr_printf		\
 	ft_aux_printf			\
+	ft_strcmp
 
 SRCS = $(addsuffix .c, $(SRC))
 OBJS = $(addsuffix .o, $(SRC))

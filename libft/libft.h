@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmolzer <pmolzer@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:05:01 by pmolzer           #+#    #+#             */
-/*   Updated: 2023/11/13 12:05:02 by pmolzer          ###   ########.fr       */
+/*   Updated: 2024/06/24 19:09:55 by hzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,6 @@ void	ft_putptr_printf(void *ptr, size_t *counter);
 /* auxiliary functions */
 char	*ft_aux_printf(unsigned long long n, char *base);
 
+/* added later */
+int	ft_strcmp(const char *s1, const char *s2);
 #endif
