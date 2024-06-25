@@ -19,8 +19,9 @@ int main(int ac, char **av, char **env)
 	char    *line;
 	t_grouped *command;
 	
-	env = NULL;
+	(void)env; // sonst: error: parameter ‘env’ set but not used [-Werror=unused-but-set-parameter]
 	command = NULL;
+	(void)av; // sonst:  error: parameter ‘av’ set but not used [-Werror=unused-but-set-parameter]
 	if (ac != 1)
 		av = NULL;
 		// MAYBE: take care of arguments to behave like bash (execute bash script, error everything else)
@@ -34,12 +35,11 @@ int main(int ac, char **av, char **env)
 		if (*line)
 		{
 			add_history(line);
-			/*if(check_line(line) != 0)
-				return(return_exit());*/
-			//parse(command, line);
-			//run_command(command, env);
-        		// free everything
-			
+			/* if(check_line(line) != 0)
+				return(return_exit()); */
+			parse(command, line); // muss man frei lassen sonst:  error: variable ‘command’ set but not used [-Werror=unused-but-set-variable]
+			// run_command(command, env); // muss man frei lassen sonst: error: parameter ‘env’ set but not used [-Werror=unused-but-set-parameter]
+        	// free everything
 		}
 		free(line);
 	}

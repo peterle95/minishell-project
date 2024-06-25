@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: pmolzer <pmolzer@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 13:41:56 by pmolzer           #+#    #+#             */
-/*   Updated: 2024/06/25 17:14:54 by hzimmerm         ###   ########.fr       */
+/*   Updated: 2024/06/25 22:45:50 by pmolzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,39 @@ void    command_execution(char *line, char **env)
     }
 }
 
-void parse(char *line, char **env)
+TokenType get_token_type(const char *token)
 {
-    t_input input;
-    char *token;
-    int i = 0;
+    if (ft_strncmp(token, "|", 2) == 0)
+        return TOKEN_PIPE;
+    else if (ft_strncmp(token, "<", 2) == 0)
+        return TOKEN_REDIRECT_IN;
+    else if (ft_strncmp(token, ">", 2) == 0)
+        return TOKEN_REDIRECT_OUT;
+    else if (ft_strncmp(token, ">>", 3) == 0)
+        return TOKEN_REDIRECT_APPEND;
+    else if (ft_strncmp(token, "<<", 3) == 0)
+        return TOKEN_HEREDOC;
+    else
+        return TOKEN_WORD;
+} */
+
+void parse(t_grouped *command, char *line)
+{
+    int i;
 
     i = 0;
-    init_input(&input);
-    // Tokenize the input line
-    token = strtok(line, " \t\n");
-    while (token != NULL && i < MAX_ARGS - 1)
-    {
-        input.words[i++] = ft_strdup(token);
-        token = strtok(NULL, " \t\n");
+    command->words = malloc(sizeof(char *) * MAX_ARGS);
+    if (command == NULL || line == NULL) {
+        printf("Error: Null pointer passed to parse\n");
+        return;
     }
-    input.words[i] = NULL;
-
-    // Simple command execution
-    command_execution(line, env);
-
-    free_array(input.words);
-}*/
+    init_grouped(command);
+    command->words[i] = ft_strtok(line, " \t\n");
+    while (command->words[i] != NULL && i < MAX_ARGS - 1)
+    {
+        printf("Token %d: %s\n", i, command->words[i]);
+        i++;
+        command->words[i] = ft_strtok(NULL, " \t\n");
+    }
+    command->words[i] = NULL; 
+}

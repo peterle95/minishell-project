@@ -1,9 +1,10 @@
 #include "../includes/minishell.h"
 
-/*void    init_input(t_input *mini_input)
+void    init_grouped(t_grouped *grouped)
 {
-    mini_input->words = NULL;
-    mini_input->command = NULL;
-    mini_input->tokens = NULL;
-    mini_input->index = 0;
-}*/
+    grouped->words = NULL;
+    grouped->red_in = NULL;
+    grouped->red_out = NULL;
+    grouped->cmd_ind = 0;
+    grouped->next = NULL;
+} 

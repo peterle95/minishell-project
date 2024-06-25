@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: pmolzer <pmolzer@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:43:51 by pmolzer           #+#    #+#             */
-/*   Updated: 2024/06/25 17:05:39 by hzimmerm         ###   ########.fr       */
+/*   Updated: 2024/06/25 22:36:13 by pmolzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,8 @@ int check_line(char *line);
 // parsing
 void parse(t_grouped *command, char *line);
 char *ft_strtok(char *str, char *delim);
+
+// initialization
+void    init_grouped(t_grouped *grouped);
 
 #endif
