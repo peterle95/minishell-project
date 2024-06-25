@@ -12,7 +12,7 @@
 
 #include "../includes/minishell.h"
 
-int main(int ac, char **av, char **env)
+int main(int ac, char **av)
 {
 	char    *line;
 	
@@ -20,12 +20,12 @@ int main(int ac, char **av, char **env)
 	if (ac != 1)
 		av = NULL;
 		// MAYBE: take care of arguments to behave like bash (execute bash script, error everything else)
-	signal(SIGINT, signal_handeling);
-    signal(SIGQUIT, signal_handeling);
+	/* signal(SIGINT, signal_handeling);
+    signal(SIGQUIT, signal_handeling); */
 	while(1)
 	{
 		line = readline("$>");
-        if(line == NULL)
+        if(line == NULL || !ft_strncmp(line, "exit", 5)) 
         {
             // This is where Ctrl+D is handled
             ft_putstr_fd("\nexit\n", 1);  // Print newline before "exit"
@@ -39,7 +39,7 @@ int main(int ac, char **av, char **env)
 			exit(EXIT_SUCCESS);
 		}
 		else if (*line)
-			parse(line, env);	
+			parse(line);	
         	// free everything
 		free(line);
 	}
