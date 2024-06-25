@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: pmolzer <pmolzer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:43:51 by pmolzer           #+#    #+#             */
-/*   Updated: 2024/06/25 15:18:23 by hzimmerm         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:05:38 by pmolzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <readline/history.h>
 # include "../libft/libft.h"
 
-#define MAX_ARGS 100
+#define MAX_ARGS 500
 
 typedef struct s_grouped
 {
@@ -68,11 +68,7 @@ void    signal_handling(int signal);
 int check_line(char *line);
 
 // parsing
-void parse(char *line, char **env);
-
-
-
-void	run_command_new(char **env, t_group *command);
-void	get_input(char *line, char **env);
+void parse(char *line);
+char *ft_strtok(char *str, char *delim);
 
 #endif
