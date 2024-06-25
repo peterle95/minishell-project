@@ -12,11 +12,15 @@
 
 #include "../includes/minishell.h"
 
-int main(int ac, char **av)
+//H: habe alles auskommentiert von commands und parsing, sodass man das Programm so compilen kann und die minishell loop funktioniert
+
+int main(int ac, char **av, char **env)
 {
 	char    *line;
+	t_grouped *command;
 	
-	(void)av;
+	env = NULL;
+	command = NULL;
 	if (ac != 1)
 		av = NULL;
 		// MAYBE: take care of arguments to behave like bash (execute bash script, error everything else)
@@ -25,22 +29,18 @@ int main(int ac, char **av)
 	while(1)
 	{
 		line = readline("$>");
-        if(line == NULL || !ft_strncmp(line, "exit", 5)) 
-        {
-            // This is where Ctrl+D is handled
-            ft_putstr_fd("\nexit\n", 1);  // Print newline before "exit"
-            break;  // Exit the loop
-        }
+        	if(line == NULL) // This is where Ctrl+D is handled
+			return(return_exit());
 		if (*line)
-			add_history(line);
-		if(check_line(line) != 0)
 		{
-			ft_putstr_fd("exit\n", 1);
-			exit(EXIT_SUCCESS);
+			add_history(line);
+			/*if(check_line(line) != 0)
+				return(return_exit());*/
+			//parse(command, line);
+			//run_command(command, env);
+        		// free everything
+			
 		}
-		else if (*line)
-			parse(line);	
-        	// free everything
 		free(line);
 	}
 	rl_clear_history();

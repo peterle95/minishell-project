@@ -6,52 +6,50 @@
 /*   By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:20:22 by hzimmerm          #+#    #+#             */
-/*   Updated: 2024/06/21 18:16:12 by hzimmerm         ###   ########.fr       */
+/*   Updated: 2024/06/25 17:13:49 by hzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-void	set_input(t_input *input)
+/*
+void	set_input(t_grouped *command)
 {
-	input->command = (char **)malloc(2 * sizeof(char *));
-	input->words = (char **)malloc(2 * sizeof(char *));
-	input->command[0] = ft_strdup("ls -l");
-	input->words[0] = ft_strdup("ls");
-	input->words[1] = ft_strdup("-l");
-	input->tokens = NULL;
-	input->index = 0;
-	input->prev = NULL;
-	input->next = NULL;
-	
+	command->words = (char **)malloc(5 * sizeof(char *));
+	command->red_in = NULL;
+	command->red_out = NULL;
+	command->cmd_ind = 0;
+	command->next = NULL;
+
+	command->words[0] = ft_strdup("ls");
+	command->words[1] = ft_strdup("-l");
 }
 
-void	run_command_newinput(char **env)
+void	run_command(t_grouped *command, char **env)
 {
-	t_input	*input = (t_input *)malloc(sizeof(t_input));
+	t_grouped *fake_input = (t_grouped *)malloc(sizeof(t_grouped));
 	char	**cmd;
 	char	*cmd_file;
 	char	*temp;
 	
-	set_input(input);
-	printf("%s\n", input->command[0]);
-	if (ft_strrchr(input->command[0], '/'))
+	set_input(fake_input);
+	printf("%s\n", command->words[0]);
+	if (ft_strrchr(command->words[0], '/'))
 	{
-		cmd_file = ft_trim(input->command[0], ' ');
+		cmd_file = ft_trim(command->words[0], ' ');
 		if (access(cmd_file, X_OK) != 0)
 		{
 			ft_putstr_fd(cmd_file, 2);
 			ft_putstr_fd(": command not found\n", 2);
 			return;
 		}
-		temp = ft_strrchr(input->command[0], '/') + 1;
+		temp = ft_strrchr(command->words[0], '/') + 1;
 		cmd = ft_split(temp, ' ');
 		if (cmd_file == NULL || cmd[0] == NULL)
 			error_return("ft_strdup", 1);
 	}
 	else
 	{
-		cmd = ft_split(input->command[0], ' ');
+		cmd = ft_split(command->words[0], ' ');
 		cmd_file = find_cmd_file(cmd, env);
 		if (cmd_file == NULL)
 		{
@@ -64,42 +62,6 @@ void	run_command_newinput(char **env)
 	free_array(cmd);
 	free(cmd_file);	
 }
-/*
-void	run_command_oldinput(char *line, char **env)
-{
-	char	**cmd;
-	char	*cmd_file;
-	char	*temp;
-	
-	if (ft_strrchr(line, '/'))
-	{
-		cmd_file = ft_trim(line, ' ');
-		if (access(cmd_file, X_OK) != 0)
-		{
-			ft_putstr_fd(cmd_file, 2);
-			ft_putstr_fd(": command not found\n", 2);
-			return;
-		}
-		temp = ft_strrchr(line, '/') + 1;
-		cmd = ft_split(temp, ' ');
-		if (cmd_file == NULL || cmd[0] == NULL)
-			error_return("ft_strdup", 1);
-	}
-	else
-	{
-		cmd = ft_split(line, ' ');
-		cmd_file = find_cmd_file(cmd, env);
-		if (cmd_file == NULL)
-		{
-			free(cmd_file);
-			free_array(cmd);
-			return;
-		}
-	}
-	fork_and_execute(cmd, cmd_file, env);
-	free_array(cmd);
-	free(cmd_file);
-}*/
 
 char	*ft_trim(char *line, char c)
 {
@@ -196,4 +158,4 @@ char	*get_paths(char **env, char *name)
 		i++;
 	}
 	return (NULL);
-}
+}*/

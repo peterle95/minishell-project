@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmolzer <pmolzer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:43:51 by pmolzer           #+#    #+#             */
-/*   Updated: 2024/06/25 16:05:38 by pmolzer          ###   ########.fr       */
+/*   Updated: 2024/06/25 17:05:39 by hzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_input
 //exit and free functions
 int	error_return(char *str, int opt);
 void	free_array(char **str);
+int	return_exit(void);
 
 //command execution functions - simple, taken from pipex, to be adjusted according to different input structure
 //void	run_command_oldinput(char *line, char **env);
@@ -59,7 +60,8 @@ char	*find_cmd_file(char **cmd, char **env);
 char	*get_paths(char **env, char *name);
 void	fork_and_execute(char **cmd, char *cmd_file, char **env);
 char	*ft_trim(char *line, char c);
-void	run_command(char **env);
+void	run_command(t_grouped *command, char **env);
+void	set_input(t_grouped *command);
 
 // singal handeling
 void    signal_handling(int signal);
@@ -68,7 +70,7 @@ void    signal_handling(int signal);
 int check_line(char *line);
 
 // parsing
-void parse(char *line);
+void parse(t_grouped *command, char *line);
 char *ft_strtok(char *str, char *delim);
 
 #endif

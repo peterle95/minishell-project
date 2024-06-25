@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmolzer <pmolzer@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 13:41:56 by pmolzer           #+#    #+#             */
-/*   Updated: 2024/06/22 13:41:56 by pmolzer          ###   ########.fr       */
+/*   Updated: 2024/06/25 17:14:54 by hzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
+/*
 void    command_execution(char *line, char **env)
 {
     t_input input;
@@ -19,9 +19,9 @@ void    command_execution(char *line, char **env)
 
     i = 0;
     if (i > 0)
-    {
+    {*/
         /*create different files for each built-in (norm)*/
-        if (ft_strcmp(input.words[0], "exit") == 0)
+      /*  if (ft_strcmp(input.words[0], "exit") == 0)
         {
             ft_putstr_fd("exit\n", 1);
             exit(EXIT_SUCCESS);
@@ -61,4 +61,4 @@ void parse(char *line, char **env)
     command_execution(line, env);
 
     free_array(input.words);
-}
+}*/
