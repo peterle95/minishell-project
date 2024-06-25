@@ -6,7 +6,7 @@
 /*   By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:43:51 by pmolzer           #+#    #+#             */
-/*   Updated: 2024/06/21 18:15:58 by hzimmerm         ###   ########.fr       */
+/*   Updated: 2024/06/25 15:18:23 by hzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,18 @@
 
 #define MAX_ARGS 100
 
+typedef struct s_grouped
+{
+	char **words;
+	char *red_in; //immer die naechste inredirection ersetzt die davor 
+	char **red_out;  //jede output redirection einzeln speichern
+	//heredoc
+	//append
+	int cmd_ind;
+	struct s_grouped *next;
+} t_grouped;
+
+/*
 typedef struct s_input
 {
 	char **words;
@@ -34,8 +46,7 @@ typedef struct s_input
 	int	index;
 	struct s_input *prev;
 	struct s_input *next;
-} t_input;
-
+} t_input;*/
 
 
 //exit and free functions
@@ -51,10 +62,17 @@ char	*ft_trim(char *line, char c);
 void	run_command(char **env);
 
 // singal handeling
-void    signal_handeling(int signal);
+void    signal_handling(int signal);
 
 // checker for input in the cmd line
 int check_line(char *line);
 
+// parsing
+void parse(char *line, char **env);
+
+
+
+void	run_command_new(char **env, t_group *command);
+void	get_input(char *line, char **env);
 
 #endif
