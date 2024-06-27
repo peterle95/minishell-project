@@ -39,10 +39,9 @@ int main(int ac, char **av, char **env)
 			/* if(check_line(line) != 0)
 				return(return_exit()); */
 			parse(command, line); // muss man frei lassen sonst:  error: variable ‘command’ set but not used [-Werror=unused-but-set-variable]
-			/* H: wenn parse einen int für anzahl of commands ausgeben könnte, wäre amazing. und dabei checken, ob nichts rauskommt, bei Fehlern o.ä.? z.b. so:
+			/* H: wenn parse einen int für anzahl of commands ausgeben könnte, wäre amazing (wenn 0 rauskommt, könnte man aus execution direct returnen). z.b. so:
 			num_cmd = parse(command, line);
-			if (num_cmd != 0)
-				execution(command, env, num_cmd);
+			execution(command, env, num_cmd);
 			*/
 			execute(command, env, 1); // das zum checken ob es pipes gibt und redirections, ersetzt wahrscheinlich run_command später
 			// run_command(command, env); // muss man frei lassen sonst: error: parameter ‘env’ set but not used [-Werror=unused-but-set-parameter]
