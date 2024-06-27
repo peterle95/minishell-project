@@ -58,21 +58,28 @@ TokenType get_token_type(const char *token)
 
 void parse(t_grouped *command, char *line)
 {
-    int i;
+    printf("Entering parse function\n");
+    int i = 0;
 
-    i = 0;
-    command->words = malloc(sizeof(char *) * MAX_ARGS);
     if (command == NULL || line == NULL) {
         printf("Error: Null pointer passed to parse\n");
         return;
     }
-    init_grouped(command);
-    command->words[i] = ft_strtok(line, " \t\n");
-    while (command->words[i] != NULL && i < MAX_ARGS - 1)
-    {
-        printf("Token %d: %s\n", i, command->words[i]);
-        i++;
-        command->words[i] = ft_strtok(NULL, " \t\n");
+
+    command->words = malloc(sizeof(char *) * MAX_ARGS);
+    if (command->words == NULL) {
+        printf("Error: Memory allocation failed\n");
+        return;
     }
-    command->words[i] = NULL; 
+
+    printf("Tokenizing line\n");
+    while (i < MAX_ARGS - 1) {
+        command->words[i] = ft_strtok(i == 0 ? line : NULL, " \t\n");
+        if (command->words[i] == NULL) {
+            break;
+        }
+        printf("Command nr: %d: %s\n", i, command->words[i]);
+        i++;
+    }
+    command->words[i] = NULL;  // Null-terminate the array of strings
 }

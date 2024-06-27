@@ -64,60 +64,53 @@ static char *breakup_string(char *string, char *delimiter)
     return (NULL);
 }
 
-/*The ft_strtok function is designed to split a string (str) into a series of tokens, 
-using a set of specified delimiters (delim). The function uses a static variable next_token 
-to keep track of the current position in the input string between consecutive calls.
+/*Probably too long, but for now it should do the job*/
+char *ft_strtok(char *str, char *delim) {
+    static char *saveptr = NULL;
+    char *token_start, *token_end;
+    char *result;
 
-Handling of initial input: 
-When ft_strtok is first called with a new input string, str will not be null. 
-In this case, next_token is initialized with the address of the input string, indicating 
-that processing should start from the beginning of the string.
-Skipping initial delimiters: 
-the function then uses first_delimiters to skip any initial delimiters in the input string. 
-first_delimiters returns the number of characters in the input string that match any of the 
-delimiters. Using next_token += strspn(next_token, delim) effectively moves the next_token pointer past 
-any initial delimiters, placing it at the beginning of the first token or at the end 
-of the string if only delimiters are present.
-End token delimiter search: breakup_string is used to find the first occurrence of any 
-delimiter in the input string, starting at the current position of next_token. 
-If a delimiter is found, next_token is updated to point to it, marking the end of the current token.
-Token termination:
-if a delimiter has been found (i.e., next_token is not NULL), 
-the character that next_token points to is replaced with a null character (\0). 
-This action effectively terminates the current token, making it a valid null-terminated string.
-Advance to next token: If a delimiter has been found, 
-next_token is incremented by 1 to advance to the next character after the delimiter. 
-This step prepares the function for the extraction of the next token in the next call*/
-char *ft_strtok(char *str, char *delim)
-{
-    static char *next_token;
-    char *parsed_token;
+    // If str is not NULL, initialize saveptr
+    if (str != NULL) 
+    {
+        saveptr = str;
+    }
 
-    if (str)
-        next_token = str;
-    else if (!next_token)
-        return (0);
+    // If saveptr is NULL or points to end of string, return NULL
+    if (saveptr == NULL || *saveptr == '\0') 
+    {
+        return NULL;
+    }
 
     // Skip leading delimiters
-    next_token += first_delimiters(next_token, delim);
-    if (*next_token == '\0')
+    saveptr += first_delimiters(saveptr, delim);
+    if (*saveptr == '\0') 
     {
-        next_token = 0;
-        return 0;
+        return NULL;
     }
 
-    parsed_token = next_token;
-    // Exctracts the word out of the string
-    next_token = breakup_string(parsed_token, delim);
-    if (next_token)
+    // Find the end of the token
+    token_start = saveptr;
+    token_end = breakup_string(saveptr, delim);
+    
+    if (token_end == NULL) 
     {
-        *next_token = '\0';
-        next_token++;
-    }
-    else
+        // This token finishes the string
+        result = strdup(token_start);
+        saveptr = NULL;
+    } 
+    else 
     {
-        next_token = 0;
+        // Allocate memory for the token and copy it
+        result = malloc(token_end - token_start + 1);
+        if (result == NULL) 
+        {
+            return NULL;  // Memory allocation failed
+        }
+        strncpy(result, token_start, token_end - token_start);
+        result[token_end - token_start] = '\0';
+        saveptr = token_end + 1;
     }
 
-    return (parsed_token);
+    return result;
 }

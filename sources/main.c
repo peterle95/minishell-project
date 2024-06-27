@@ -34,6 +34,7 @@ int main(int ac, char **av, char **env)
 			return(return_exit());
 		if (*line)
 		{
+			init_grouped(command);
 			add_history(line);
 			/* if(check_line(line) != 0)
 				return(return_exit()); */
