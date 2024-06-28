@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Henriette <Henriette@student.42.fr>        +#+  +:+       +#+        */
+/*   By: pmolzer <pmolzer@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 13:41:56 by pmolzer           #+#    #+#             */
-/*   Updated: 2024/06/27 16:59:30 by Henriette        ###   ########.fr       */
+/*   Updated: 2024/06/28 12:28:54 by pmolzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,26 +58,25 @@ TokenType get_token_type(const char *token)
 
 void parse(t_grouped *command, char *line)
 {
-    //printf("Entering parse function\n");
     int i = 0;
 
-    if (command == NULL || line == NULL) {
+    if (command == NULL || line == NULL) 
+    {
         printf("Error: Null pointer passed to parse\n");
         return;
     }
     command->words = malloc(sizeof(char *) * MAX_ARGS);
-    if (command->words == NULL) {
+    if (command->words == NULL) 
+    {
         printf("Error: Memory allocation failed\n");
         return;
     }
-
-    //printf("Tokenizing line\n");
-    while (i < MAX_ARGS - 1) {
+    while (i < MAX_ARGS - 1) 
+    {
         command->words[i] = ft_strtok(i == 0 ? line : NULL, " \t\n");
         if (command->words[i] == NULL) {
             break;
         }
-        //printf("Command nr: %d: %s\n", i, command->words[i]);
         i++;
     }
     command->words[i] = NULL;  // Null-terminate the array of strings

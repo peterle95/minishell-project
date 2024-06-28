@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Henriette <Henriette@student.42.fr>        +#+  +:+       +#+        */
+/*   By: pmolzer <pmolzer@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:43:51 by pmolzer           #+#    #+#             */
-/*   Updated: 2024/06/28 11:48:09 by pmolzer          ###   ########.fr       */
+/*   Updated: 2024/06/28 12:21:20 by pmolzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	set_input(t_grouped *command);
 void	execute(t_grouped *command, char **env, int	num_cmd);
 
 // singal handeling
-void    signal_handling(int signal);
+void    signal_handling(int sig);
 
 // checker for input in the cmd line
 int check_line(char *line);

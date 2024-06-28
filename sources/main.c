@@ -12,7 +12,6 @@
 
 #include "../includes/minishell.h"
 
-
 int main(int ac, char **av, char **env)
 {
 	char    *line;
@@ -24,13 +23,16 @@ int main(int ac, char **av, char **env)
 	if (ac != 1)
 		av = NULL;
 		// MAYBE: take care of arguments to behave like bash (execute bash script, error everything else)
-	/* signal(SIGINT, signal_handeling);
-    signal(SIGQUIT, signal_handeling); */
+	signal(SIGINT, signal_handling);
+    signal(SIGQUIT, signal_handling);
 	while(1)
 	{
 		line = readline("$>");
         	if(line == NULL) // This is where Ctrl+D is handled
-			return(return_exit());
+			{
+				printf("Received Ctrl + D");
+				return(return_exit());
+			}
 		if (*line)
 		{
 			command = (t_grouped *)malloc(sizeof(t_grouped));
