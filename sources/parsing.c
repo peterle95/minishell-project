@@ -6,7 +6,7 @@
 /*   By: pmolzer <pmolzer@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 13:41:56 by pmolzer           #+#    #+#             */
-/*   Updated: 2024/06/28 12:28:54 by pmolzer          ###   ########.fr       */
+/*   Updated: 2024/06/28 15:15:23 by pmolzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,59 @@ void    command_execution(char *line, char **env)
         }
     }
 }
+*/
+void null_terminate_arrays(t_grouped *command, int word_count, int red_out_count, 
+int heredoc_count, int append_count, int pipe_count)
+{
+    if (word_count < MAX_NODE) command->words[word_count] = NULL;
+    if (red_out_count < MAX_NODE) command->red_out[red_out_count] = NULL;
+    if (heredoc_count < MAX_NODE) command->heredoc[heredoc_count] = NULL;
+    if (append_count < MAX_NODE) command->append_out[append_count] = NULL;
+    if (pipe_count < MAX_NODE) command->pipe[pipe_count] = NULL;
+}
+
+void assign_token(t_grouped *command, TokenType token_type, char **token, int *word_count, 
+int *red_out_count, int *heredoc_count, int *append_count, int *pipe_count)
+{
+    if (token_type == TOKEN_REDIRECT_IN)
+    {
+        *token = ft_strtok(NULL, " \t\n");
+        if (*token != NULL)
+        {
+            if (command->red_in)
+                free(command->red_in);
+            command->red_in = ft_strdup(*token);
+        }
+    }
+    else if (token_type == TOKEN_REDIRECT_OUT)
+    {
+        *token = ft_strtok(NULL, " \t\n");
+        if (*token != NULL)
+            command->red_out[(*red_out_count)++] = ft_strdup(*token);
+    }
+    else if (token_type == TOKEN_REDIRECT_APPEND)
+    {
+        *token = ft_strtok(NULL, " \t\n");
+        if (*token != NULL)
+            command->append_out[(*append_count)++] = ft_strdup(*token);
+    }
+    else if (token_type == TOKEN_HEREDOC)
+    {
+        *token = ft_strtok(NULL, " \t\n");
+        if (*token != NULL)
+            command->heredoc[(*heredoc_count)++] = ft_strdup(*token);
+    }
+    else if (token_type == TOKEN_PIPE)
+    {
+        command->pipe[(*pipe_count)++] = ft_strdup("|");
+        command->cmd_ind++;
+    }
+    else if (token_type == TOKEN_WORD)
+    {
+        command->words[(*word_count)++] = ft_strdup(*token);
+    }
+}
+
 
 TokenType get_token_type(const char *token)
 {
@@ -54,30 +107,43 @@ TokenType get_token_type(const char *token)
         return TOKEN_HEREDOC;
     else
         return TOKEN_WORD;
-} */
+} 
 
 void parse(t_grouped *command, char *line)
 {
     int i = 0;
+    char *token;
+    TokenType token_type;
+    int word_count = 0;
+    int red_out_count = 0;
+    int heredoc_count = 0;
+    int append_count = 0;
+    int pipe_count = 0;
 
     if (command == NULL || line == NULL) 
     {
         printf("Error: Null pointer passed to parse\n");
         return;
     }
-    command->words = malloc(sizeof(char *) * MAX_ARGS);
-    if (command->words == NULL) 
+    if (command->words == NULL || command->red_out == NULL) 
     {
         printf("Error: Memory allocation failed\n");
         return;
     }
-    while (i < MAX_ARGS - 1) 
+    token = ft_strtok(line, " \t\n");
+    while (token != NULL && i < MAX_NODE - 1) 
     {
-        command->words[i] = ft_strtok(i == 0 ? line : NULL, " \t\n");
-        if (command->words[i] == NULL) {
-            break;
+        token_type = get_token_type(token);
+        assign_token(command, token_type, &token, &word_count, 
+        &red_out_count, &heredoc_count, &append_count, &pipe_count);
+        printf("Token: %i --> type: %i\n", i, token_type);
+        if (token_type != TOKEN_REDIRECT_IN && token_type != TOKEN_REDIRECT_OUT && 
+            token_type != TOKEN_REDIRECT_APPEND && token_type != TOKEN_HEREDOC)
+        {
+            token = ft_strtok(NULL, " \t\n");
         }
         i++;
     }
-    command->words[i] = NULL;  // Null-terminate the array of strings
+    null_terminate_arrays(command, word_count, red_out_count, 
+    heredoc_count, append_count, pipe_count);;
 }
