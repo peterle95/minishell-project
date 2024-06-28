@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+         #
+#    By: pmolzer <pmolzer@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/15 19:03:47 by pmolzer           #+#    #+#              #
-#    Updated: 2024/06/20 12:08:10 by hzimmerm         ###   ########.fr        #
+#    Updated: 2024/06/28 11:50:06 by pmolzer          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ RM = rm -rf
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(LDFLAGS) $(CFLAGS) $(INC) $(OBJS) $(LIBFT) -o $(NAME)
+	$(CC) $(INC) $(OBJS) $(LDFLAGS) $(CFLAGS) $(LIBFT) -o $(NAME)
 
 $(LIBFT):
 	@if [ ! -f "$(LIBFT)" ]; then \

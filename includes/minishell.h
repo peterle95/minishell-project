@@ -6,12 +6,14 @@
 /*   By: Henriette <Henriette@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:43:51 by pmolzer           #+#    #+#             */
-/*   Updated: 2024/06/27 16:58:17 by Henriette        ###   ########.fr       */
+/*   Updated: 2024/06/28 11:48:09 by pmolzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+# include "../libft/libft.h"
 
 # include <unistd.h>
 # include <stdio.h>
