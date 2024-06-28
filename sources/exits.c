@@ -6,7 +6,7 @@
 /*   By: Henriette <Henriette@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 14:17:20 by hzimmerm          #+#    #+#             */
-/*   Updated: 2024/06/28 16:25:44 by Henriette        ###   ########.fr       */
+/*   Updated: 2024/06/28 17:34:50 by Henriette        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	error_return(char *str, int opt)
 		ft_putstr_fd(str, 2);
 	if (opt == 0)
 		perror(str);
-	return (1);
+	return (-1);
 }
 
 void	free_array(char **str)
