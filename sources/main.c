@@ -17,7 +17,7 @@ int main(int ac, char **av, char **env)
 	char    *line;
 	t_grouped *command;
 	
-	(void)env; // sonst: error: parameter ‘env’ set but not used [-Werror=unused-but-set-parameter]
+	//(void)env; // sonst: error: parameter ‘env’ set but not used [-Werror=unused-but-set-parameter]
 	command = NULL;
 	(void)av; // sonst:  error: parameter ‘av’ set but not used [-Werror=unused-but-set-parameter]
 	if (ac != 1)

@@ -6,7 +6,7 @@
 /*   By: pmolzer <pmolzer@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:43:51 by pmolzer           #+#    #+#             */
-/*   Updated: 2024/06/28 19:05:54 by pmolzer          ###   ########.fr       */
+/*   Updated: 2024/06/28 21:01:24 by Henriette        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,16 @@ void	fork_and_execute(char **cmd, char *cmd_file, char **env);
 char	*ft_trim(char *line, char c);
 void	run_command(t_grouped *command, char **env);
 void	set_input(t_grouped *command);
-int	execute(t_grouped *command, char **env, int	num_cmd);
+void	execute(t_grouped *command, char **env, int	num_cmd);
 
 // redirection and pipe functions
 int	check_and_redirect(t_grouped *command);
+int	redirection_in(t_grouped *command, int i);
+int	redirection_out(t_grouped *command, int i);
+int	save_in_out(int	*stdin_copy, int *stdout_copy);
+int	restore_in_out(int	*stdin_copy, int *stdout_copy);
+void	set_fake_redirection(t_grouped *command);
+
 
 // singal handeling
 void    signal_handling(int sig);
