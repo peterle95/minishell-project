@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exits.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: Henriette <Henriette@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 14:17:20 by hzimmerm          #+#    #+#             */
-/*   Updated: 2024/06/25 17:03:05 by hzimmerm         ###   ########.fr       */
+/*   Updated: 2024/06/28 16:25:44 by Henriette        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	error_return(char *str, int opt)
 		ft_putstr_fd(str, 2);
 	if (opt == 0)
 		perror(str);
-	exit(EXIT_FAILURE);
+	return (1);
 }
 
 void	free_array(char **str)
@@ -37,8 +37,9 @@ void	free_array(char **str)
 	free(str);
 }
 
-int	return_exit(void)
+int	success_exit(char *str)
 {
-	ft_putstr_fd("exit\n", 1);
-        exit(EXIT_SUCCESS);
+	ft_putstr_fd(str, 1);
+    exit(EXIT_SUCCESS);
 }
+

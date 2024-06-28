@@ -30,8 +30,8 @@ int main(int ac, char **av, char **env)
 		line = readline("$>");
         	if(line == NULL) // This is where Ctrl+D is handled
 			{
-				printf("Received Ctrl + D");
-				return(return_exit());
+				//printf("Received Ctrl + D"); H: bash printed das nicht
+				return(success_exit("exit\n"));
 			}
 		if (*line)
 		{
