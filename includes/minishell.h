@@ -28,6 +28,7 @@
 # include "../libft/libft.h"
 
 #define MAX_ARGS 500
+#define MAX_NODE 100
 #define PERR 0
 #define PRIN 1
 
@@ -36,11 +37,21 @@ typedef struct s_grouped
 	char **words;
 	char **red_in; //jede input redirection einzeln speichern 
 	char **red_out;  //jede output redirection einzeln speichern
-	//heredoc
-	//append
+	char **heredoc;
+	char **append_out;
+	char **pipe;
 	int cmd_ind;
 	struct s_grouped *next;
 } t_grouped;
+
+typedef enum TokenType {
+  TOKEN_PIPE,
+  TOKEN_REDIRECT_IN,
+  TOKEN_REDIRECT_OUT,
+  TOKEN_REDIRECT_APPEND,
+  TOKEN_HEREDOC,
+  TOKEN_WORD
+} TokenType;
 
 /*
 typedef struct s_input
