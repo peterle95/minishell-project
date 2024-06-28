@@ -6,7 +6,7 @@
 /*   By: pmolzer <pmolzer@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:43:51 by pmolzer           #+#    #+#             */
-/*   Updated: 2024/06/28 12:21:20 by pmolzer          ###   ########.fr       */
+/*   Updated: 2024/06/28 14:52:54 by pmolzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,28 @@
 # include "../libft/libft.h"
 
 #define MAX_ARGS 500
+#define MAX_NODE 100
 
 typedef struct s_grouped
 {
 	char **words;
 	char *red_in; //immer die naechste inredirection ersetzt die davor 
 	char **red_out;  //jede output redirection einzeln speichern
-	//heredoc
-	//append
+	char **heredoc;
+	char **append_out;
+	char **pipe;
 	int cmd_ind;
 	struct s_grouped *next;
 } t_grouped;
+
+typedef enum TokenType {
+  TOKEN_PIPE,
+  TOKEN_REDIRECT_IN,
+  TOKEN_REDIRECT_OUT,
+  TOKEN_REDIRECT_APPEND,
+  TOKEN_HEREDOC,
+  TOKEN_WORD
+} TokenType;
 
 /*
 typedef struct s_input
@@ -55,6 +66,7 @@ typedef struct s_input
 int	error_return(char *str, int opt);
 void	free_array(char **str);
 int	return_exit(void);
+void free_grouped(t_grouped *command);
 
 //command execution functions - simple, taken from pipex, to be adjusted according to different input structure
 //void	run_command_oldinput(char *line, char **env);
