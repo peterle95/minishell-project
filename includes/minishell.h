@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmolzer <pmolzer@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: Henriette <Henriette@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:43:51 by pmolzer           #+#    #+#             */
 /*   Updated: 2024/06/28 11:48:09 by pmolzer          ###   ########.fr       */
@@ -64,6 +64,7 @@ void	fork_and_execute(char **cmd, char *cmd_file, char **env);
 char	*ft_trim(char *line, char c);
 void	run_command(t_grouped *command, char **env);
 void	set_input(t_grouped *command);
+void	execute(t_grouped *command, char **env, int	num_cmd);
 
 // singal handeling
 void    signal_handling(int signal);

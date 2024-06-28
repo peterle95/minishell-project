@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: Henriette <Henriette@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:20:22 by hzimmerm          #+#    #+#             */
-/*   Updated: 2024/06/25 17:13:49 by hzimmerm         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:57:51 by Henriette        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-/*
+
 void	set_input(t_grouped *command)
 {
 	command->words = (char **)malloc(5 * sizeof(char *));
@@ -20,19 +20,20 @@ void	set_input(t_grouped *command)
 	command->cmd_ind = 0;
 	command->next = NULL;
 
-	command->words[0] = ft_strdup("ls");
+	command->words[0] = ft_strdup("/bin/ls");
 	command->words[1] = ft_strdup("-l");
+	command->words[2] = NULL;
 }
 
 void	run_command(t_grouped *command, char **env)
 {
-	t_grouped *fake_input = (t_grouped *)malloc(sizeof(t_grouped));
+	//t_grouped *fake_input = (t_grouped *)malloc(sizeof(t_grouped));
 	char	**cmd;
 	char	*cmd_file;
 	char	*temp;
 	
-	set_input(fake_input);
-	printf("%s\n", command->words[0]);
+	//command = NULL;
+	//set_input(fake_input);
 	if (ft_strrchr(command->words[0], '/'))
 	{
 		cmd_file = ft_trim(command->words[0], ' ');
@@ -49,17 +50,17 @@ void	run_command(t_grouped *command, char **env)
 	}
 	else
 	{
-		cmd = ft_split(command->words[0], ' ');
-		cmd_file = find_cmd_file(cmd, env);
+		//cmd = ft_split(fake_input->words, ' ');
+		cmd_file = find_cmd_file(command->words, env);
 		if (cmd_file == NULL)
 		{
 			free(cmd_file);
-			free_array(cmd);
+			free_array(command->words);
 			return;
 		}
 	}
-	fork_and_execute(cmd, cmd_file, env);
-	free_array(cmd);
+	fork_and_execute(command->words, cmd_file, env);
+	free_array(command->words);
 	free(cmd_file);	
 }
 
@@ -158,4 +159,4 @@ char	*get_paths(char **env, char *name)
 		i++;
 	}
 	return (NULL);
-}*/
+}

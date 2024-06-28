@@ -12,7 +12,6 @@
 
 #include "../includes/minishell.h"
 
-//H: habe alles auskommentiert von commands und parsing, sodass man das Programm so compilen kann und die minishell loop funktioniert
 
 int main(int ac, char **av, char **env)
 {
@@ -34,16 +33,22 @@ int main(int ac, char **av, char **env)
 			return(return_exit());
 		if (*line)
 		{
+			command = (t_grouped *)malloc(sizeof(t_grouped));
 			init_grouped(command);
 			add_history(line);
 			/* if(check_line(line) != 0)
 				return(return_exit()); */
 			parse(command, line); // muss man frei lassen sonst:  error: variable ‘command’ set but not used [-Werror=unused-but-set-variable]
+			/* H: wenn parse einen int für anzahl of commands ausgeben könnte, wäre amazing (wenn 0 rauskommt, könnte man aus execution direct returnen). z.b. so:
+			num_cmd = parse(command, line);
+			execution(command, env, num_cmd);
+			*/
+			execute(command, env, 1); // das zum checken ob es pipes gibt und redirections, ersetzt wahrscheinlich run_command später
 			// run_command(command, env); // muss man frei lassen sonst: error: parameter ‘env’ set but not used [-Werror=unused-but-set-parameter]
         	// free everything
 		}
 		free(line);
 	}
-	rl_clear_history();
+	rl_clear_history(); // H: denke evtl. muss das in den exit Part?
 	return (0);
 }
