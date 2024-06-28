@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Henriette <Henriette@student.42.fr>        +#+  +:+       +#+        */
+/*   By: pmolzer <pmolzer@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:43:51 by pmolzer           #+#    #+#             */
-/*   Updated: 2024/06/28 16:49:53 by Henriette        ###   ########.fr       */
+/*   Updated: 2024/06/28 19:05:54 by pmolzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_input
 int	error_return(char *str, int opt);
 void	free_array(char **str);
 int	success_exit(char *str);
+
 
 //command execution functions - simple, taken from pipex, to be adjusted according to different input structure
 //void	run_command_oldinput(char *line, char **env);
