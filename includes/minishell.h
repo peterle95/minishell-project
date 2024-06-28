@@ -6,7 +6,7 @@
 /*   By: pmolzer <pmolzer@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:43:51 by pmolzer           #+#    #+#             */
-/*   Updated: 2024/06/28 14:52:54 by pmolzer          ###   ########.fr       */
+/*   Updated: 2024/06/28 18:46:27 by pmolzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ typedef struct s_input
 int	error_return(char *str, int opt);
 void	free_array(char **str);
 int	return_exit(void);
-void free_grouped(t_grouped *command);
 
 //command execution functions - simple, taken from pipex, to be adjusted according to different input structure
 //void	run_command_oldinput(char *line, char **env);
