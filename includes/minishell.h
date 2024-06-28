@@ -6,12 +6,14 @@
 /*   By: pmolzer <pmolzer@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:43:51 by pmolzer           #+#    #+#             */
-/*   Updated: 2024/06/25 22:36:13 by pmolzer          ###   ########.fr       */
+/*   Updated: 2024/06/28 11:48:09 by pmolzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+# include "../libft/libft.h"
 
 # include <unistd.h>
 # include <stdio.h>
