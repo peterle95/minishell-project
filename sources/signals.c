@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmolzer <pmolzer@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: Henriette <Henriette@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:00:49 by pmolzer           #+#    #+#             */
-/*   Updated: 2024/06/28 12:29:56 by pmolzer          ###   ########.fr       */
+/*   Updated: 2024/06/28 16:54:17 by Henriette        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void    signal_handling(int sig)
     if (sig == SIGINT)
     {
         // Handle Ctrl+C
-        printf("Caught signal SIGINT %d\n", sig);
+       // printf("Caught signal SIGINT %d\n", sig); // H: bash printed das nicht
         // Handle SIGINT (Ctrl + C)
         rl_replace_line("", 0);
         ft_putstr_fd("\n", 1);
@@ -26,7 +26,7 @@ void    signal_handling(int sig)
     }
     else if (sig == SIGQUIT)
     {
-        printf("Caught signal SIGQUIT %d\n", sig);
+        // printf("Caught signal SIGQUIT %d\n", sig); // H: bash printed das nicht
         // Handle SIGQUIT (Ctrl + \)
         rl_replace_line("", 0);
         ft_putstr_fd("Quit: ", 1);

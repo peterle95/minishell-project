@@ -19,7 +19,7 @@ int	error_return(char *str, int opt)
 		ft_putstr_fd(str, 2);
 	if (opt == 0)
 		perror(str);
-	exit(EXIT_FAILURE);
+	return (1);
 }
 
 void	free_array(char **str)
@@ -37,8 +37,9 @@ void	free_array(char **str)
 	free(str);
 }
 
-int	return_exit(void)
+int	success_exit(char *str)
 {
-	ft_putstr_fd("exit\n", 1);
-        exit(EXIT_SUCCESS);
+	ft_putstr_fd(str, 1);
+    exit(EXIT_SUCCESS);
 }
+

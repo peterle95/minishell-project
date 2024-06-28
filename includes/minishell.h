@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmolzer <pmolzer@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: Henriette <Henriette@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:43:51 by pmolzer           #+#    #+#             */
-/*   Updated: 2024/06/28 14:52:54 by pmolzer          ###   ########.fr       */
+/*   Updated: 2024/06/28 16:49:53 by Henriette        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,18 @@
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <fcntl.h>
 # include "../libft/libft.h"
 
 #define MAX_ARGS 500
 #define MAX_NODE 100
+#define PERR 0
+#define PRIN 1
 
 typedef struct s_grouped
 {
 	char **words;
-	char *red_in; //immer die naechste inredirection ersetzt die davor 
+	char **red_in; //jede input redirection einzeln speichern 
 	char **red_out;  //jede output redirection einzeln speichern
 	char **heredoc;
 	char **append_out;
@@ -65,8 +68,7 @@ typedef struct s_input
 //exit and free functions
 int	error_return(char *str, int opt);
 void	free_array(char **str);
-int	return_exit(void);
-void free_grouped(t_grouped *command);
+int	success_exit(char *str);
 
 //command execution functions - simple, taken from pipex, to be adjusted according to different input structure
 //void	run_command_oldinput(char *line, char **env);
@@ -76,7 +78,10 @@ void	fork_and_execute(char **cmd, char *cmd_file, char **env);
 char	*ft_trim(char *line, char c);
 void	run_command(t_grouped *command, char **env);
 void	set_input(t_grouped *command);
-void	execute(t_grouped *command, char **env, int	num_cmd);
+int	execute(t_grouped *command, char **env, int	num_cmd);
+
+// redirection and pipe functions
+int	check_and_redirect(t_grouped *command);
 
 // singal handeling
 void    signal_handling(int sig);
