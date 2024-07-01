@@ -6,7 +6,7 @@
 /*   By: pmolzer <pmolzer@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:43:51 by pmolzer           #+#    #+#             */
-/*   Updated: 2024/06/28 21:01:24 by Henriette        ###   ########.fr       */
+/*   Updated: 2024/07/01 13:46:43 by pmolzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <fcntl.h>
-# include "../libft/libft.h"
+
 
 #define MAX_ARGS 500
 #define MAX_NODE 100

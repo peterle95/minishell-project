@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+ /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
@@ -41,17 +41,18 @@ void    command_execution(char *line, char **env)
 }
 */
 void null_terminate_arrays(t_grouped *command, int word_count, int red_out_count, 
-int heredoc_count, int append_count, int pipe_count)
+int heredoc_count, int append_count, int pipe_count, int red_in_count)
 {
     if (word_count < MAX_NODE) command->words[word_count] = NULL;
     if (red_out_count < MAX_NODE) command->red_out[red_out_count] = NULL;
+    if (red_in_count < MAX_NODE) command->heredoc[red_in_count] = NULL;
     if (heredoc_count < MAX_NODE) command->heredoc[heredoc_count] = NULL;
     if (append_count < MAX_NODE) command->append_out[append_count] = NULL;
     if (pipe_count < MAX_NODE) command->pipe[pipe_count] = NULL;
 }
 
 void assign_token(t_grouped *command, TokenType token_type, char **token, int *word_count, 
-int *red_out_count, int *heredoc_count, int *append_count, int *pipe_count)
+int *red_out_count, int *heredoc_count, int *append_count, int *pipe_count, int*red_in_count)
 {
     if (token_type == TOKEN_REDIRECT_IN)
     {
@@ -60,7 +61,7 @@ int *red_out_count, int *heredoc_count, int *append_count, int *pipe_count)
         {
             if (command->red_in)
                 free(command->red_in);
-            command->red_in = ft_strdup(*token);
+            command->red_in[(*red_in_count)++] = ft_strdup(*token);
         }
     }
     else if (token_type == TOKEN_REDIRECT_OUT)
@@ -116,6 +117,7 @@ void parse(t_grouped *command, char *line)
     TokenType token_type;
     int word_count = 0;
     int red_out_count = 0;
+    int red_in_count = 0;
     int heredoc_count = 0;
     int append_count = 0;
     int pipe_count = 0;
@@ -135,7 +137,7 @@ void parse(t_grouped *command, char *line)
     {
         token_type = get_token_type(token);
         assign_token(command, token_type, &token, &word_count, 
-        &red_out_count, &heredoc_count, &append_count, &pipe_count);
+        &red_out_count, &heredoc_count, &append_count, &pipe_count, &red_in_count);
         printf("Token: %i --> type: %i\n", i, token_type);
         if (token_type != TOKEN_REDIRECT_IN && token_type != TOKEN_REDIRECT_OUT && 
             token_type != TOKEN_REDIRECT_APPEND && token_type != TOKEN_HEREDOC)
@@ -145,5 +147,5 @@ void parse(t_grouped *command, char *line)
         i++;
     }
     null_terminate_arrays(command, word_count, red_out_count, 
-    heredoc_count, append_count, pipe_count);;
+    heredoc_count, append_count, pipe_count, red_in_count);;
 }
