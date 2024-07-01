@@ -6,7 +6,7 @@
 /*   By: pmolzer <pmolzer@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 17:01:38 by pmolzer           #+#    #+#             */
-/*   Updated: 2024/07/01 17:47:26 by pmolzer          ###   ########.fr       */
+/*   Updated: 2024/07/01 22:06:09 by pmolzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,3 @@ void    init_grouped(t_grouped *command)
     command->cmd_ind = 0;
    // command->next = NULL;
 } 
-
-void init_list(t_list *command_list)
-{
-    t_grouped *initial_command;
-
-    if (command_list == NULL)
-        return;
-
-    initial_command = (t_grouped *)malloc(sizeof(t_grouped));
-    if (!initial_command)
-    {
-        printf("Error: Memory allocation failed in init_list\n");
-        exit(EXIT_FAILURE);
-    }
-
-    init_grouped(initial_command);
-
-    command_list->content = initial_command;
-    command_list->next = NULL;
-}

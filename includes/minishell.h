@@ -6,7 +6,7 @@
 /*   By: pmolzer <pmolzer@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:43:51 by pmolzer           #+#    #+#             */
-/*   Updated: 2024/07/01 17:17:21 by pmolzer          ###   ########.fr       */
+/*   Updated: 2024/07/01 22:04:59 by pmolzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_grouped
 	char **append_out;
 	char **pipe;
 	int cmd_ind;
-	// struct s_grouped *next; we'll use the next pointer in the t_list struct
+	struct s_grouped *next;
 } t_grouped;
 
 typedef enum TokenType {
@@ -69,7 +69,6 @@ typedef struct s_input
 int	error_return(char *str, int opt);
 void	free_array(char **str);
 int	success_exit(char *str);
-void free_grouped(void *content);
 
 
 //command execution functions - simple, taken from pipex, to be adjusted according to different input structure
@@ -103,5 +102,4 @@ char *ft_strtok(char *str, char *delim);
 
 // initialization
 void    init_grouped(t_grouped *grouped);
-void init_list(t_list *command_list);
 #endif

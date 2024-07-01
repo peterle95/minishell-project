@@ -124,74 +124,41 @@ TokenType get_token_type(const char *token)
         return TOKEN_WORD;
 } 
 
-void parse(t_list **command_list, char *line)
+void parse(t_grouped *command, char *line)
 {
-    t_grouped   *current_command = NULL;
-    t_list  *new_node = NULL;
-    int i;
+    int i = 0;
     char *token;
     TokenType token_type;
-    int word_count;
-    int red_out_count;
-    int red_in_count;
-    int heredoc_count;
-    int append_count;
-    int pipe_count;
+    int word_count = 0;
+    int red_out_count = 0;
+    int red_in_count = 0;
+    int heredoc_count = 0;
+    int append_count = 0;
+    int pipe_count = 0;
 
-    i = 0;
-    word_count = 0;
-    red_out_count = 0;
-    red_in_count = 0;
-    heredoc_count = 0;
-    append_count = 0;
-    pipe_count = 0;
-
-    current_command = malloc(sizeof(t_grouped));
-    if (!current_command)
+    if (command == NULL || line == NULL) 
+    {
+        printf("Error: Null pointer passed to parse\n");
+        return;
+    }
+    if (command->words == NULL || command->red_out == NULL) 
     {
         printf("Error: Memory allocation failed\n");
         return;
     }
-    init_grouped(current_command);
     token = ft_strtok(line, " \t\n");
-    while (token != NULL && i < MAX_NODE - 1)
+    while (token != NULL && i < MAX_NODE - 1) 
     {
         token_type = get_token_type(token);
-        if (token_type == TOKEN_PIPE)
-        {
-            new_node = ft_lstnew(current_command);
-            ft_lstadd_back(command_list, new_node);
-            
-            current_command = malloc(sizeof(t_grouped));
-            if (!current_command)
-            {
-                printf("Error: Memory allocation failed\n");
-                return;
-            }
-            word_count = 0;
-            red_out_count = 0;
-            red_in_count = 0;
-            heredoc_count = 0;
-            append_count = 0;
-        }
-        else
-        {
-            assign_token(current_command, token_type, &token, &word_count,
-                         &red_out_count, &heredoc_count, &append_count, &pipe_count,
-                         &red_in_count);
-        }
-        
-        if (token_type != TOKEN_REDIRECT_IN && token_type != TOKEN_REDIRECT_OUT &&
+        assign_token(command, token_type, &token, &word_count, 
+        &red_out_count, &heredoc_count, &append_count, &pipe_count, &red_in_count);
+        if (token_type != TOKEN_REDIRECT_IN && token_type != TOKEN_REDIRECT_OUT && 
             token_type != TOKEN_REDIRECT_APPEND && token_type != TOKEN_HEREDOC)
         {
             token = ft_strtok(NULL, " \t\n");
         }
         i++;
     }
-    // Add the last command to the list
-    new_node = ft_lstnew(current_command);
-    ft_lstadd_back(command_list, new_node);
-
-    null_terminate_arrays(current_command, word_count, red_out_count,
-                          heredoc_count, append_count, pipe_count, red_in_count);
+    null_terminate_arrays(command, word_count, red_out_count, 
+    heredoc_count, append_count, pipe_count, red_in_count);;
 }
