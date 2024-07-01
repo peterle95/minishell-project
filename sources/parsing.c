@@ -60,36 +60,50 @@ int *red_out_count, int *heredoc_count, int *append_count, int *pipe_count, int*
         if (*token != NULL)
         {
             if (command->red_in)
-                free(command->red_in);
-            command->red_in[(*red_in_count)++] = ft_strdup(*token);
+            {
+             command->red_in[(*red_in_count)++] = ft_strdup(*token);
+             printf("\n%s", command->red_in[0]);
+             // printf("Stored in -> Redirection In: %s\n", command->red_in[*red_in_count - 1]);
+             }
         }
     }
     else if (token_type == TOKEN_REDIRECT_OUT)
     {
         *token = ft_strtok(NULL, " \t\n");
         if (*token != NULL)
-            command->red_out[(*red_out_count)++] = ft_strdup(*token);
+        {
+            command->red_out[(*red_out_count)] = ft_strdup(*token);
+            printf("\n%s", command->red_out[0]);
+        }
     }
     else if (token_type == TOKEN_REDIRECT_APPEND)
     {
         *token = ft_strtok(NULL, " \t\n");
         if (*token != NULL)
+        {
             command->append_out[(*append_count)++] = ft_strdup(*token);
+            printf("\n%s", command->append_out[0]);
+        }
     }
     else if (token_type == TOKEN_HEREDOC)
     {
         *token = ft_strtok(NULL, " \t\n");
         if (*token != NULL)
+        {
             command->heredoc[(*heredoc_count)++] = ft_strdup(*token);
+            printf("\n%s", command->heredoc[0]);
+        }
     }
     else if (token_type == TOKEN_PIPE)
     {
         command->pipe[(*pipe_count)++] = ft_strdup("|");
+        printf("\n%s", command->pipe[0]);
         command->cmd_ind++;
     }
     else if (token_type == TOKEN_WORD)
     {
         command->words[(*word_count)++] = ft_strdup(*token);
+        printf("\n%s", command->words[0]);
     }
 }
 
@@ -138,7 +152,6 @@ void parse(t_grouped *command, char *line)
         token_type = get_token_type(token);
         assign_token(command, token_type, &token, &word_count, 
         &red_out_count, &heredoc_count, &append_count, &pipe_count, &red_in_count);
-        printf("Token: %i --> type: %i\n", i, token_type);
         if (token_type != TOKEN_REDIRECT_IN && token_type != TOKEN_REDIRECT_OUT && 
             token_type != TOKEN_REDIRECT_APPEND && token_type != TOKEN_HEREDOC)
         {
