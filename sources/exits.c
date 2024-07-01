@@ -6,11 +6,23 @@
 /*   By: pmolzer <pmolzer@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 14:17:20 by hzimmerm          #+#    #+#             */
-/*   Updated: 2024/06/28 17:34:50 by Henriette        ###   ########.fr       */
+/*   Updated: 2024/07/01 16:45:20 by pmolzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void free_grouped(void *content)
+{
+    t_grouped *command = (t_grouped *)content;
+    free_array(command->words);
+    free_array(command->red_in);
+    free_array(command->red_out);
+    free_array(command->heredoc);
+    free_array(command->append_out);
+    free_array(command->pipe);
+    free(command);
+}
 
 int	error_return(char *str, int opt)
 {

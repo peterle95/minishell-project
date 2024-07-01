@@ -15,10 +15,10 @@
 int main(int ac, char **av, char **env)
 {
 	char    *line;
-	t_grouped *command;
+	t_list *command_list;
 	
-	//(void)env; // sonst: error: parameter ‘env’ set but not used [-Werror=unused-but-set-parameter]
-	command = NULL;
+	(void)env; // sonst: error: parameter ‘env’ set but not used [-Werror=unused-but-set-parameter]
+	command_list = NULL;
 	(void)av; // sonst:  error: parameter ‘av’ set but not used [-Werror=unused-but-set-parameter]
 	if (ac != 1)
 		av = NULL;
@@ -35,19 +35,20 @@ int main(int ac, char **av, char **env)
 			}
 		if (*line)
 		{
-			command = (t_grouped *)malloc(sizeof(t_grouped));
-			init_grouped(command);
+			command_list = (t_list *)malloc(sizeof(t_list));
+			init_list(command_list);
 			add_history(line);
 			/* if(check_line(line) != 0)
 				return(return_exit()); */
-			parse(command, line); // muss man frei lassen sonst:  error: variable ‘command’ set but not used [-Werror=unused-but-set-variable]
+			parse(&command_list, line); // muss man frei lassen sonst:  error: variable ‘command’ set but not used [-Werror=unused-but-set-variable]
 			/* H: wenn parse einen int für anzahl of commands ausgeben könnte, wäre amazing (wenn 0 rauskommt, könnte man aus execution direct returnen). z.b. so:
 			num_cmd = parse(command, line);
 			execution(command, env, num_cmd);
 			*/
-			execute(command, env, 1); // das zum checken ob es pipes gibt und redirections, ersetzt wahrscheinlich run_command später
+			//execute(command_list, env, ft_lstsize(command_list)); // das zum checken ob es pipes gibt und redirections, ersetzt wahrscheinlich run_command später
 			// run_command(command, env); // muss man frei lassen sonst: error: parameter ‘env’ set but not used [-Werror=unused-but-set-parameter]
         	// free everything
+			ft_lstclear(&command_list, free_grouped);
 		}
 		free(line);
 	}
