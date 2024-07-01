@@ -6,7 +6,7 @@
 /*   By: pmolzer <pmolzer@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:43:51 by pmolzer           #+#    #+#             */
-/*   Updated: 2024/07/01 22:04:59 by pmolzer          ###   ########.fr       */
+/*   Updated: 2024/07/01 22:36:27 by pmolzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void    signal_handling(int sig);
 int check_line(char *line);
 
 // parsing
-void parse(t_list **command_list, char *line);
+void parse(t_grouped *command, char *line);
 char *ft_strtok(char *str, char *delim);
 
 // initialization
