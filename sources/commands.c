@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Henriette <Henriette@student.42.fr>        +#+  +:+       +#+        */
+/*   By: pmolzer <pmolzer@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:20:22 by hzimmerm          #+#    #+#             */
-/*   Updated: 2024/06/27 16:57:51 by Henriette        ###   ########.fr       */
+/*   Updated: 2024/07/01 17:18:24 by pmolzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	set_input(t_grouped *command)
 	command->red_in = NULL;
 	command->red_out = NULL;
 	command->cmd_ind = 0;
-	command->next = NULL;
+	// command->next = NULL;
 
 	command->words[0] = ft_strdup("/bin/ls");
 	command->words[1] = ft_strdup("-l");
